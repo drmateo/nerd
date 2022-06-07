@@ -80,7 +80,7 @@ def main():
     device = torch.device(device_name)
 
     print("Working on", args["<checkpoint>"])
-    checkpoint = torch.load(args["<checkpoint>"])
+    checkpoint = torch.load(args["<checkpoint>"], map_location=device)
     model = sym.models.SymmetryNet().to(device)
     model = sym.utils.MyDataParallel(
         model, device_ids=list(range(args["--devices"].count(",") + 1))
